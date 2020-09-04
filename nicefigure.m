@@ -1,5 +1,7 @@
 function nicefigure
 
+% Say no to ugly MATLAB figures :3
+
 AllFigure = findall(0, 'Type', 'figure');
 
 AllText = findall(0, 'Type', 'text');
