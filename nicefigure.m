@@ -24,10 +24,10 @@ for j = 1:numel(AllLegend)
 end
 
 AllLines = findall(0, 'Type', 'line');
-set(AllLines, 'LineWidth', 1.2, 'MarkerSize', 7.5);
+set(AllLines, 'LineWidth', 1.1, 'MarkerSize', 7.5);
 
 AllConsLines = findall(0, 'Type', 'constantline');
-set(AllConsLines, 'LineWidth', 1.2);
+set(AllConsLines, 'LineWidth', 1.1);
 
 AllTextBox = findall(0, 'Type', 'textbox');
 set(AllTextBox, 'Interpreter', 'latex', 'FontSize', 15, 'LineStyle', 'none');
