@@ -2,7 +2,7 @@ function nicefigure
 
 % Made by Adib Yusof (2020) | The only place ugly MATLAB figures belong to is Recycle Bin :3
 % Call this function from command window or in your script to turn all current existing figures into nicer ones; 'nicer' according to me at least
-% If you are using math equations in any parts of your figure, make sure they are enclosed within $...$, e.g., $E = mc^2$
+% If you are using math equations in any parts of your figure, make sure they are enclosed within $...$ and follow LaTeX syntax, e.g., $E = mc^{2}$ 
 
 AllFigure = findall(0, 'Type', 'figure');
 
