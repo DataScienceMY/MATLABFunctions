@@ -32,5 +32,7 @@ set(AllConsLines, 'LineWidth', 1.2, 'Interpreter', 'latex', 'FontSize', 15);
 AllTextBox = findall(0, 'Type', 'textbox');
 set(AllTextBox, 'Interpreter', 'latex', 'FontSize', 15, 'LineStyle', 'none');
 
+AllHeatmap = findall(0, 'Type', 'heatmap');
+set(AllHeatmap, 'FontName', 'Century', 'FontSize', 15, 'GridVisible', 'off');
 end
 
