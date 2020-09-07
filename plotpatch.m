@@ -1,16 +1,21 @@
-function PatchHndl = plotpatch(X, Color, AxesHndl)
+function PatchHndl = plotpatch(X, Color, Alpha, AxesHndl)
 %
-% Made by Adib Yusof (2020)
 % Shade the background of a plot with a desired color 
 % 
-% Input arguments:
-% X (integer or datetime 1xn vector)                  : X points to be shaded
-% Color (char or 1x3 numeric vector, optional)        : Shading color       
-% AxesHndl (axes handle, optional)                    : Axis to be shaded
+%   PatchHndl = plotpatch(X, Color, Alpha, AxesHndl)
 %
+%   PatchHndl (patch object)                             : Handle of the patch object
+%   X (integer or daily datetime 1xn vector)             : X points to be shaded
+%   Color (char or 1x3 numeric vector, optional)         : Shading color       
+%   Alpha (numeric 0 - 1, optional)                      : Transparency of shading
+%   AxesHndl (axes handle, optional)                     : Axis to be shaded
+%
+% Made by Adib Yusof (2020)
+
 arguments
     X (1, :)   
     Color = 'r'
+    Alpha (1, 1) double = 0.1
     AxesHndl matlab.graphics.axis.Axes = gca 
 end
 
@@ -22,10 +27,10 @@ end
 
 PrevYLim = AxesHndl.YLim;
 
-XMat(1, :) = X-1-0.5;
-XMat(2, :) = X-1+0.5;
-XMat(3, :) = X-1+0.5;
-XMat(4, :) = X-1-0.5;
+XMat(1, :) = X-1;
+XMat(2, :) = X;
+XMat(3, :) = X;
+XMat(4, :) = X-1;
 
 YMat = NaN(size(XMat));
 YMat(1, :) = deal(-1e5);
@@ -33,8 +38,12 @@ YMat(2, :) = deal(-1e5);
 YMat(3, :) = deal(+1e5);
 YMat(4, :) = deal(+1e5);
 
-PatchHndl = patch(XMat, YMat, Color, 'HandleVisibility', 'off', 'FaceAlpha', 0.3, 'LineStyle', 'none');
-uistack(PatchHndl, 'bottom');
+PatchHndl = patch(XMat, YMat, Color, 'HandleVisibility', 'off', 'FaceAlpha', Alpha, 'LineStyle', 'none');
+try
+    uistack(PatchHndl, 'bottom');
+catch ME
+    disp('Patch object couldn''t be arranged to the bottom.');
+end
 
 ylim(PrevYLim);
 
