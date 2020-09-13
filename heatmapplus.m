@@ -24,7 +24,7 @@ if size(Opts.CDisp) ~= size(CData)
 end
 
 Fig= figure;
-[X, Y] = meshgrid(XData, YData);             % CUSTOM HEATMAP - CAN BE TURNED INTO A FUNCTION >>
+[X, Y] = meshgrid(XData, YData);          
 HM = imagesc( X(:), Y(:), CData );
 AxHndl = HM.Parent;
 HMLbl = sprintfc( ['%.', num2str(Opts.Precision), 'f'], Opts.CDisp );
