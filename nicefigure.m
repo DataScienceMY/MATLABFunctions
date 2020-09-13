@@ -7,7 +7,7 @@ function nicefigure
 AllFigure = findall(0, 'Type', 'figure');
 
 AllText = findall(0, 'Type', 'text');
-set(AllText, 'Interpreter', 'latex', 'FontSize', 15);
+set(AllText, 'Interpreter', 'latex', 'FontSize', 16);
 
 AllAxes = findall(0, 'Type', 'axes');
 for i = 1:numel(AllAxes)
@@ -27,12 +27,19 @@ AllLines = findall(0, 'Type', 'line');
 set(AllLines, 'LineWidth', 1.1, 'MarkerSize', 7.5);
 
 AllConsLines = findall(0, 'Type', 'constantline');
-set(AllConsLines, 'LineWidth', 1.2, 'Interpreter', 'latex', 'FontSize', 15);
+set(AllConsLines, 'LineWidth', 1.4, 'Interpreter', 'latex', 'FontSize', 15);
 
 AllTextBox = findall(0, 'Type', 'textbox');
 set(AllTextBox, 'Interpreter', 'latex', 'FontSize', 15, 'LineStyle', 'none');
 
 AllHeatmap = findall(0, 'Type', 'heatmap');
 set(AllHeatmap, 'FontName', 'Century', 'FontSize', 15, 'GridVisible', 'off');
+
+AllColorbar = findall(0, 'Type', 'colorbar');
+set(AllColorbar, 'FontSize', 15);
+if ~ isempty(AllColorbar)
+    AllColorbar.Label.Interpreter = 'latex';
+    AllColorbar.TickLabelInterpreter = 'latex';
+end
 end
 
