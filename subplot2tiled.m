@@ -1,6 +1,21 @@
 function NewFig = subplot2tiled(Rows, Cols, OldFig, Opts)
-% Made by Adib Yusof (2020)
+
 % Convert subplot to tiledlayout
+% 
+% Syntax
+% NewFig = subplot2tiled(Rows, Cols, OldFig, Opts)
+%   
+%   NewFig          : Handle of the newly generated figure
+%   Rows            : The number of rows in the subplot/tiledlayout
+%   Cols            : The number of columns in the subplot/tiledlayout
+%   OldFig          : (Optional) The figure handle which contains the subplot
+%
+%   Name-Value pairs (optional)
+%   TileSpacing     : 'none', 'compact'
+%   Padding         : 'none', 'compact'
+%
+% Made by Adib Yusof (2020) | mkhairuladibmyusof@gmail.com
+
 arguments
    Rows (1,1) double
    Cols (1,1) double

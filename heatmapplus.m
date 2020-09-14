@@ -1,5 +1,24 @@
 function Fig = heatmapplus(XData, YData, CData, Opts)
 
+% Create customizable heatmaps
+% 
+% Syntax
+% Fig = heatmapplus(XData, YData, CData, Opts)
+%   
+%   Fig                     : Figure handle of the heatmap
+%   XData                   : Vector of the data of X
+%   YData                   : Vector of the data of Y
+%   CData                   : Matrix of color data; dimension must match X x Y
+% 
+%   Name-value pairs (optional)
+%   CDisp                   : Display different cells value than defined by CData
+%   CMap                    : Function to generate colormap, such as jet, parula, bone etc
+%   XLabel, YLabel, CLabel  : Labels for X, Y and C data
+%   Precision               : Number of decimal points of CData/CDisp to show
+%   NaNDisp                 : Text to label NaN values
+%
+% Made by Adib Yusof (2020) | mkhairuladibmyusof@gmail.com
+
 arguments
     XData
     YData

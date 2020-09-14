@@ -1,12 +1,14 @@
 function nicefigure(f)
 
-% Made by Adib Yusof (2020) | The only place ugly MATLAB figures belong to is Recycle Bin :p
+% The only place ugly MATLAB figures belong to is Recycle Bin :p
 % 
 % Syntax
 %   nicefigure          :  Transform all current figures at once
 %   nicefigure(f)       :  Transform only one figure which specified by its handle f
 %   
-%   *If you are using math equations in any parts of your figure, make sure they are enclosed within $...$ and follow LaTeX syntax, e.g., $E = mc^{2}$ 
+%   >> If you are using math equations in any parts of your figure, make sure they are enclosed within $...$ and follow LaTeX syntax, e.g., $E = mc^{2}$ 
+%
+% Made by Adib Yusof (2020) | mkhairuladibmyusof@gmail.com
 
 arguments
    f = findall(0, 'Type', 'figure')
