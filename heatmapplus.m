@@ -1,4 +1,4 @@
-function [HM, Ax, Fig] = heatmapplus(XData, YData, CData, Opts)
+function Fig = heatmapplus(XData, YData, CData, Opts)
 
 arguments
     XData
@@ -23,7 +23,7 @@ if size(Opts.CDisp) ~= size(CData)
     error('The CDisp dimension does not match CData.');
 end
 
-Fig= figure;
+Fig = figure;
 [X, Y] = meshgrid(XData, YData);          
 HM = imagesc( X(:), Y(:), CData );
 AxHndl = HM.Parent;
