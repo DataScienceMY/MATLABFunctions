@@ -1,4 +1,5 @@
 function NewFig = subplot2tiled(Rows, Cols, OldFig, Opts)
+% Made by Adib Yusof (2020)
 % Convert subplot to tiledlayout
 arguments
    Rows (1,1) double
@@ -30,21 +31,11 @@ for i = numel(Ax) : -1 : 1
     if ~isempty(Ax(i).Legend)
         Lgd = legend;
         Lgd.String = Ax(i).Legend.String;
+        Lgd.Title.String = Ax(i).Legend.Title.String;
     end
     if ~isempty(Ax(i).Colorbar)
         Colbar = colorbar;
         Colbar.Colormap = Ax(i).Colormap;
     end
-    
-    
-     
- 
-    
-    
-  
 end
-
-
-
-nicefigure
 end
