@@ -38,8 +38,10 @@ set(AllHeatmap, 'FontName', 'Century', 'FontSize', 15, 'GridVisible', 'off');
 AllColorbar = findall(0, 'Type', 'colorbar');
 set(AllColorbar, 'FontSize', 15);
 if ~ isempty(AllColorbar)
-    AllColorbar.Label.Interpreter = 'latex';
-    AllColorbar.TickLabelInterpreter = 'latex';
+    for i = 1:numel(AllColorbar)
+        AllColorbar(i).Label.Interpreter = 'latex';
+        AllColorbar(i).TickLabelInterpreter = 'latex';
+    end
 end
 end
 
