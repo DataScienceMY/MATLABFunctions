@@ -1,15 +1,17 @@
-function nicefigure
+function nicefigure(f)
 
 % Made by Adib Yusof (2020) | The only place ugly MATLAB figures belong to is Recycle Bin :p
 % Call this function from command window or in your script to turn all current existing figures into nicer ones; 'nicer' according to me at least
 % If you are using math equations in any parts of your figure, make sure they are enclosed within $...$ and follow LaTeX syntax, e.g., $E = mc^{2}$ 
 
-AllFigure = findall(0, 'Type', 'figure');
+arguments
+   f = findall(0, 'Type', 'figure')
+end
 
-AllText = findall(0, 'Type', 'text');
+AllText = findall(f, 'Type', 'text');
 set(AllText, 'Interpreter', 'latex', 'FontSize', 16);
 
-AllAxes = findall(0, 'Type', 'axes');
+AllAxes = findall(f, 'Type', 'axes');
 for i = 1:numel(AllAxes)
     set(AllAxes(i), 'ticklabelinterpreter', 'latex', 'FontSize', 15, 'box', 'on')
     set(AllAxes(i).XLabel, 'FontSize', 16);
@@ -17,25 +19,25 @@ for i = 1:numel(AllAxes)
     AllAxes(i).Title.FontSize = 16;
 end
 
-AllLegend = findall(0, 'Type', 'legend');
+AllLegend = findall(f, 'Type', 'legend');
 set(AllLegend, 'Interpreter', 'latex', 'FontSize', 14);
 for j = 1:numel(AllLegend)
     set(AllLegend(j).Title, 'Interpreter', 'latex', 'FontSize', 15);
 end
 
-AllLines = findall(0, 'Type', 'line');
+AllLines = findall(f, 'Type', 'line');
 set(AllLines, 'LineWidth', 1.1, 'MarkerSize', 7.5);
 
-AllConsLines = findall(0, 'Type', 'constantline');
+AllConsLines = findall(f, 'Type', 'constantline');
 set(AllConsLines, 'LineWidth', 1.4, 'Interpreter', 'latex', 'FontSize', 15);
 
-AllTextBox = findall(0, 'Type', 'textbox');
+AllTextBox = findall(f, 'Type', 'textbox');
 set(AllTextBox, 'Interpreter', 'latex', 'FontSize', 15, 'LineStyle', 'none');
 
-AllHeatmap = findall(0, 'Type', 'heatmap');
+AllHeatmap = findall(f, 'Type', 'heatmap');
 set(AllHeatmap, 'FontName', 'Century', 'FontSize', 15, 'GridVisible', 'off');
 
-AllColorbar = findall(0, 'Type', 'colorbar');
+AllColorbar = findall(f, 'Type', 'colorbar');
 set(AllColorbar, 'FontSize', 15);
 if ~ isempty(AllColorbar)
     for i = 1:numel(AllColorbar)
