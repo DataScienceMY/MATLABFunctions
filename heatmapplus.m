@@ -70,5 +70,4 @@ AxHndl.XLabel.String = Opts.XLabel;
 AxHndl.YLabel.String = Opts.YLabel;
 CBHndl = colorbar;
 CBHndl.Label.String = Opts.CLabel;
-nicefigure;
 end
