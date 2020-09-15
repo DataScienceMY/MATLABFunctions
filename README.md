@@ -9,8 +9,8 @@
 Thank you!
 
 ### Functions
-heatmapplus.m                 : Create customizable heatmaps
-nicefigure.m                  : The only place ugly MATLAB figures belong to is Recycle Bin :p
-plotpatch.m                   : Shade the background of a plot with a desired color
-subplot2tiled.m               : Convert subplot to tiledlayout
-tictactoe.m                   : A simple tic-tac-toe game I made just for fun
+- heatmapplus.m                 : Create customizable heatmaps
+- nicefigure.m                  : The only place ugly MATLAB figures belong to is Recycle Bin :p
+- plotpatch.m                   : Shade the background of a plot with a desired color
+- subplot2tiled.m               : Convert subplot to tiledlayout
+- tictactoe.m                   : A simple tic-tac-toe game I made just for fun
