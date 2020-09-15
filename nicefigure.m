@@ -1,6 +1,6 @@
 function nicefigure(f)
 
-% The only place ugly MATLAB figures belong to is Recycle Bin :p
+% Improve the quality of figures, e.g., bigger texts, thicker lines, using latex interpreter etc
 % 
 % Syntax
 %   nicefigure          :  Transform all current figures at once
