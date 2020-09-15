@@ -1,6 +1,6 @@
 function tictactoe
 
-% A simple tic-toe game I made just for fun
+% A simple tic-tac-toe game I made just for fun
 % 
 % Made by Adib Yusof (2020) | mkhairuladibmyusof@gmail.com
 
