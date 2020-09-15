@@ -8,6 +8,8 @@
 
 Thank you!
 
+< Adib >
+
 ### Functions
 - heatmapplus.m                 : Create customizable heatmaps
 - nicefigure.m                  : Improve the quality of figures, e.g., bigger texts, thicker lines, using latex interpreter etc
