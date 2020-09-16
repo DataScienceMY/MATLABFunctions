@@ -14,7 +14,7 @@ function NewFig = subplot2tiled(Rows, Cols, OldFig, Opts)
 %   TileSpacing     : 'none', 'compact'
 %   Padding         : 'none', 'compact'
 %
-% Made by Adib Yusof (2020) | mkhairuladibmyusof@gmail.com
+% Written by Adib Yusof (2020) | mkhairuladibmyusof@gmail.com
 
 arguments
    Rows (1,1) double

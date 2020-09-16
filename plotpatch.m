@@ -10,7 +10,7 @@ function PatchHndl = plotpatch(X, Color, Alpha, AxesHndl)
 %   Alpha (numeric 0 - 1, optional)                      : Transparency of shading
 %   AxesHndl (axes handle, optional)                     : Axis to be shaded
 %
-% Made by Adib Yusof (2020) | mkhairuladibmyusof@gmail.com
+% Written by Adib Yusof (2020) | mkhairuladibmyusof@gmail.com
 
 
 arguments

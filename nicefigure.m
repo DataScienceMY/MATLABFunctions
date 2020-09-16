@@ -8,7 +8,7 @@ function nicefigure(f)
 %   
 %   >> If you are using math equations in any parts of your figure, make sure they are enclosed within $...$ and follow LaTeX syntax, e.g., $E = mc^{2}$ 
 %
-% Made by Adib Yusof (2020) | mkhairuladibmyusof@gmail.com
+% Written by Adib Yusof (2020) | mkhairuladibmyusof@gmail.com
 
 arguments
    f = findall(0, 'Type', 'figure')

@@ -17,7 +17,7 @@ function Fig = heatmapplus(XData, YData, CData, Opts)
 %   Precision               : Number of decimal points of CData/CDisp to show
 %   NaNDisp                 : Text to label NaN values
 %
-% Made by Adib Yusof (2020) | mkhairuladibmyusof@gmail.com
+% Written by Adib Yusof (2020) | mkhairuladibmyusof@gmail.com
 
 arguments
     XData
