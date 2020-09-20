@@ -14,5 +14,6 @@ Thank you!
 - heatmapplus.m                 : Create customizable heatmaps
 - nicefigure.m                  : Improve the quality of figures, e.g., bigger texts, thicker lines, using latex interpreter etc
 - plotpatch.m                   : Shade the background of a plot with a desired color
+- repheatmaptext.m              : Replacing uncustomizable text of heatmap to custom (latex) texts (WORK IN PROGRESS)
 - subplot2tiled.m               : Convert subplot to tiledlayout
 - tictactoe.m                   : A simple tic-tac-toe game I made just for fun
