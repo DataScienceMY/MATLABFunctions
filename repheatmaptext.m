@@ -1,5 +1,5 @@
 function repheatmaptext(FigHandle, Opts)
-% Replacing uncustomizable text of heatmap to custom (latex) texts (WORK IN PROGRESS)
+% (WORK IN PROGRESS) Replacing uncustomizable text of heatmap to custom (latex) texts 
 
 arguments
     FigHandle (1,1) = gcf
