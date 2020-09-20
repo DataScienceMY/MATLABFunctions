@@ -6,8 +6,8 @@ function Fig = heatmapplus(XData, YData, CData, Opts)
 % Fig = heatmapplus(XData, YData, CData, Opts)
 %   
 %   Fig                     : Figure handle of the heatmap
-%   XData                   : Vector of the data of X
-%   YData                   : Vector of the data of Y
+%   XData                   : Numerical vector of the data of X 
+%   YData                   : Numerical Vector of the data of Y
 %   CData                   : Matrix of color data; dimension must match X x Y
 % 
 %   Name-value pairs (optional)
