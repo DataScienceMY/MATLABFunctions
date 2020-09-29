@@ -1,6 +1,6 @@
 function GM = readMAGDAS(StartDate, EndDate, StnCode, SamplingPeriod, FileNameFormat, FolderPath, DataFormat, HeaderLine)
 
-% This function reads MAGDAS geomagnetic field data
+% Reads MAGDAS geomagnetic field data. Read more about the data: http://magdas2.serc.kyushu-u.ac.jp/
 %
 % Output argument
 %   GM (1x5 table)                              : {Extracted geomagnetic field data}                              
