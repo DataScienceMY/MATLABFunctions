@@ -1,4 +1,4 @@
-function GM = readMAGDAS(StartDate, EndDate, StnCode, SamplingPeriod, FileNameFormat, FolderPath, DataFormat, HeaderLine)
+function GM = readMAGDAS(StartDate, EndDate, StnCode, SamplingPeriod, FileNameFormat, Opts)
 
 % Reads MAGDAS geomagnetic field data. Read more about the data: http://magdas2.serc.kyushu-u.ac.jp/
 %
@@ -12,10 +12,13 @@ function GM = readMAGDAS(StartDate, EndDate, StnCode, SamplingPeriod, FileNameFo
 %   SamplingPeriod (in seconds | 1x1 double)    : 1
 %   FileNameFormat (char vector)                : 'psec.sec'
 %
-% Optional input arguments (with default values)
-%   FolderPath (1xn char)                       : 'D:\OneDrive\Data' (default: current MATLAB directory) 
-%   DataFormat (1xn char)                       : '%4d-%02d-%02d %02d:%02d:%02d.000 %3d %9.2f %9.2f %9.2f %9.2f' (default)
-%   HeaderLine (1x1 double)                     : 13 (default)
+% Optional input arguments of name-value pairs
+% Pass arguments like this: readMAGDAS(..., 'Name', Value, ...)
+%   FolderPath (1xn char)                  : 'D:\OneDrive\Data' (default: current MATLAB directory) 
+%   DataFormat (1xn char)                  : '%4d-%02d-%02d %02d:%02d:%02d.000 %3d %9.2f %9.2f %9.2f %9.2f' (default)
+%   HeaderLine (1x1 double)                : 13 (default) | skip until after this line number when scanning for the data
+%   RemOutlier (1x1 logical)               : false (default) | removes outliers
+%   Preview (1x1 logical)                  : false (default) | preview the data
 %
 % Written by Adib Yusof (2020) | mkhairuladibmyusof@gmail.com
 
@@ -25,35 +28,43 @@ arguments
     StnCode (1,3) char
     SamplingPeriod (1,1) double
     FileNameFormat (1,:) char
-    FolderPath (1,:) char = pwd
-    DataFormat (1,:) char = '%4d-%02d-%02d %02d:%02d:%02d.000 %3d %9.2f %9.2f %9.2f %9.2f'
-    HeaderLine (1,1) double = 13
+    Opts.FolderPath (1,:) char = pwd
+    Opts.DataFormat (1,:) char = '%4d-%02d-%02d %02d:%02d:%02d.000 %3d %9.2f %9.2f %9.2f %9.2f'
+    Opts.HeaderLine (1,1) double = 13
+    Opts.RemOutlier (1,1) logical = false
+    Opts.Preview (1,1) logical = false
 end
 
 clc; tic; 
-StnCode = char(StnCode); FileNameFormat = char(FileNameFormat); FolderPath = char(FolderPath); DataFormat = char(DataFormat);
+StnCode = char(StnCode); FileNameFormat = char(FileNameFormat); Opts.FolderPath = char(Opts.FolderPath); Opts.DataFormat = char(Opts.DataFormat);
 UTC(:, 1) = datetime(StartDate) : seconds(SamplingPeriod) : datetime(EndDate) + days(1) - seconds(1);
 [H, D, Z, F] = deal( NaN(numel(UTC), 1) );
 DataIdx = 1;
 IndxIncrement = (86400 / SamplingPeriod) - 1;
 FileNameFormat = ['%3s%04d%02d%02d', FileNameFormat];
-if FolderPath(end) ~= '\'     FolderPath = [FolderPath, '\'];     end %#ok<*SEPEX>
-if ~ exist(FolderPath, 'dir')     error('Folder path does not exist.');    end
-warning('off'); addpath(FolderPath); warning('on');
-TotalDays = datenum(EndDate) - datenum(StartDate) + 1;
-fprintf('Extracting data of MAGDAS %s station from %s until %s...\n', StnCode, datetime(StartDate), datetime(EndDate));
-Progress = 0; DayCount = 1;
+if ~ exist(Opts.FolderPath, 'dir') error('Folder path does not exist.'); end
 
+if Opts.FolderPath(end) == '\' Opts.FolderPath(end) = []; end
+PathList = regexp(path, pathsep, 'Split');
+IsMATLABPath = ismember(Opts.FolderPath, PathList);
+warning('off'); addpath(Opts.FolderPath); warning('on');
+Opts.FolderPath = [Opts.FolderPath, '\']; %#ok<*SEPEX>
+
+TotalDays = datenum(EndDate) - datenum(StartDate) + 1;
+Progress = 0; DayCount = 1;
+fprintf('Extracting data of MAGDAS %s station from %s until %s...\n', StnCode, datetime(StartDate), datetime(EndDate));
+
+% Extraction
 for i = datetime(StartDate) : datetime(EndDate)
     DateAsVector = datevec(i);
     FileName = sprintf(FileNameFormat, StnCode, DateAsVector);
-    FullFilePath = [FolderPath, FileName];
+    FullFilePath = [Opts.FolderPath, FileName];
     FileID = fopen(FullFilePath);
     if FileID < 0
         continue;
     end
 
-    ExtractedData = textscan(FileID, DataFormat, 'HeaderLines', HeaderLine);
+    ExtractedData = textscan(FileID, Opts.DataFormat, 'HeaderLines', Opts.HeaderLine);
     [H(DataIdx:DataIdx+IndxIncrement), D(DataIdx:DataIdx+IndxIncrement), Z(DataIdx:DataIdx+IndxIncrement), F(DataIdx:DataIdx+IndxIncrement)] = ExtractedData{end-3:end};
     
     DataIdx = DataIdx + IndxIncrement + 1;
@@ -68,7 +79,32 @@ for i = datetime(StartDate) : datetime(EndDate)
     end
     DayCount = DayCount + 1;
 end
+
 GM = table(UTC, H, D, Z, F);
 GM.Properties.Description = [StnCode, ' station data obtained from MAGDAS.'];
+Components = GM.Properties.VariableNames(2:end);
+if ~ IsMATLABPath rmpath(Opts.FolderPath(1:end-1));  end
 fprintf('Extraction finished after %.2f seconds.\n', toc);
+
+% Additional functionalities
+if Opts.RemOutlier && exist('GM', 'var')
+    for i = 1:numel(Components)
+        OutlierThres = nanmean(GM.(Components{i})) + 10*nanstd(GM.(Components{i}));
+        GM.(Components{i})( GM.(Components{i}) > OutlierThres ) = NaN;
+    end
+end
+
+if Opts.Preview && exist('GM', 'var')
+    FigHandle = figure; %#ok<*NASGU>
+    Axes = cell(size(Components));
+    for i = 1:numel(Components)
+        Axes{i} = subplot(numel(Components),1,i); 
+        plot(GM.UTC, GM.(Components{i}));
+        ylabel([Components{i}, ' (nT)']);
+        if i < numel(Components) xticklabels([]); end
+        linkaxes([Axes{:}], 'x');
+    end
+    try nicefigure('PanelLabel', false); catch end
+end
+
 end
