@@ -43,8 +43,6 @@ end
 AllText = findall(Opts.FigHandle, 'Type', 'text');
 set(AllText, 'Interpreter', 'latex', 'FontSize', Opts.TextSize);
 
-AllAxes = findall(Opts.FigHandle, 'Type', 'axes');
-
 if Opts.PanelLabel
     for i = 1:numel(Opts.FigHandle)
         CurrentFig = Opts.FigHandle(i);
@@ -52,7 +50,17 @@ if Opts.PanelLabel
         delete(ExistingLabel);
         AxInFig = vertcat( findall(CurrentFig, 'Type', 'axes'), findall(CurrentFig, 'Type', 'heatmap') ) ;
         LetterCode = 97;        % Code 97 corresponds to letter 'a' in ASCII
-        for j = 1:numel(AxInFig)
+        
+        Positions = arrayfun(@(X) X.Position, AxInFig, 'UniformOutput', false);     % If the axes are arranged vertically, label them from bottom to top
+        Lefts = cellfun(@(X) X(1), Positions);
+        Bottoms = cellfun(@(X) X(2), Positions);
+        if all(round(Lefts(1), 2) == round(Lefts, 2))
+            AxesOrder = numel(AxInFig):-1:1;
+        else
+            AxesOrder = 1:numel(AxInFig);
+        end
+        
+        for j = AxesOrder
             AxPosition = AxInFig(j).Position;
             AxInset = AxInFig(j).TightInset;
             LblPosition = [AxPosition(1)-1.1*AxInset(1) AxPosition(2)+0.88*AxPosition(4) 0.04 0.04 ];     % [left, bottom, width, height]
@@ -64,6 +72,7 @@ if Opts.PanelLabel
     end
 end
 
+AllAxes = findall(Opts.FigHandle, 'Type', 'axes');
 for i = 1:numel(AllAxes)
     set(AllAxes(i), 'TickLabelInterpreter', 'latex', 'FontSize', Opts.TickSize, 'box', 'on')
     set(AllAxes(i).XLabel, 'FontSize', Opts.LabelSize);
