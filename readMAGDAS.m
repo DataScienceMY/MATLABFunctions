@@ -35,7 +35,7 @@ arguments
     Opts.Preview (1,1) logical = false
 end
 
-clc; tic; 
+home; tic; 
 StnCode = char(StnCode); FileNameFormat = char(FileNameFormat); Opts.FolderPath = char(Opts.FolderPath); Opts.DataFormat = char(Opts.DataFormat);
 UTC(:, 1) = datetime(StartDate) : seconds(SamplingPeriod) : datetime(EndDate) + days(1) - seconds(1);
 [H, D, Z, F] = deal( NaN(numel(UTC), 1) );
@@ -72,7 +72,7 @@ for i = datetime(StartDate) : datetime(EndDate)
     
     ProgressPercent = round(100*(DayCount / TotalDays), -1);
     if ~ rem(ProgressPercent, 10) && ProgressPercent > Progress
-        clc;
+        home;
         fprintf('Extracting data of MAGDAS %s station from %s until %s...\n', StnCode, datetime(StartDate), datetime(EndDate));
         fprintf('Progress: %s %d%%\n', repelem('-', ProgressPercent / 10), ProgressPercent);
         Progress = ProgressPercent;
@@ -84,6 +84,7 @@ GM = table(UTC, H, D, Z, F);
 GM.Properties.Description = [StnCode, ' station data obtained from MAGDAS.'];
 Components = GM.Properties.VariableNames(2:end);
 if ~ IsMATLABPath rmpath(Opts.FolderPath(1:end-1));  end
+if all(isnan(GM.H)) warning('No file was extracted. Please check that all parameters have been entered correctly.'); end
 fprintf('Extraction finished after %.2f seconds.\n', toc);
 
 % Additional functionalities
