@@ -43,6 +43,7 @@ DataIdx = 1;
 IndxIncrement = (86400 / SamplingPeriod) - 1;
 FileNameFormat = ['%3s%04d%02d%02d', FileNameFormat];
 if ~ exist(Opts.FolderPath, 'dir') error('Folder path does not exist.'); end
+TotalFileExist = 0;
 
 if Opts.FolderPath(end) == '\' Opts.FolderPath(end) = []; end
 PathList = regexp(path, pathsep, 'Split');
@@ -56,20 +57,6 @@ fprintf('Extracting data of MAGDAS %s station from %s until %s...\n', StnCode, d
 
 % Extraction
 for i = datetime(StartDate) : datetime(EndDate)
-    DateAsVector = datevec(i);
-    FileName = sprintf(FileNameFormat, StnCode, DateAsVector);
-    FullFilePath = [Opts.FolderPath, FileName];
-    FileID = fopen(FullFilePath);
-    if FileID < 0
-        continue;
-    end
-
-    ExtractedData = textscan(FileID, Opts.DataFormat, 'HeaderLines', Opts.HeaderLine);
-    [H(DataIdx:DataIdx+IndxIncrement), D(DataIdx:DataIdx+IndxIncrement), Z(DataIdx:DataIdx+IndxIncrement), F(DataIdx:DataIdx+IndxIncrement)] = ExtractedData{end-3:end};
-    
-    DataIdx = DataIdx + IndxIncrement + 1;
-    fclose(FileID);
-    
     ProgressPercent = round(100*(DayCount / TotalDays), -1);
     if ~ rem(ProgressPercent, 10) && ProgressPercent > Progress
         home;
@@ -78,6 +65,22 @@ for i = datetime(StartDate) : datetime(EndDate)
         Progress = ProgressPercent;
     end
     DayCount = DayCount + 1;
+    
+    DateAsVector = datevec(i);
+    FileName = sprintf(FileNameFormat, StnCode, DateAsVector);
+    FullFilePath = [Opts.FolderPath, FileName];
+    FileID = fopen(FullFilePath);
+    if FileID < 0
+        DataIdx = DataIdx + IndxIncrement + 1;
+        continue;
+    end
+
+    ExtractedData = textscan(FileID, Opts.DataFormat, 'HeaderLines', Opts.HeaderLine);
+    [H(DataIdx:DataIdx+IndxIncrement), D(DataIdx:DataIdx+IndxIncrement), Z(DataIdx:DataIdx+IndxIncrement), F(DataIdx:DataIdx+IndxIncrement)] = ExtractedData{end-3:end};
+    
+    DataIdx = DataIdx + IndxIncrement + 1;
+    TotalFileExist = TotalFileExist + 1;
+    fclose(FileID);
 end
 
 GM = table(UTC, H, D, Z, F);
@@ -85,7 +88,7 @@ GM.Properties.Description = [StnCode, ' station data obtained from MAGDAS.'];
 Components = GM.Properties.VariableNames(2:end);
 if ~ IsMATLABPath rmpath(Opts.FolderPath(1:end-1));  end
 if all(isnan(GM.H)) warning('No file was extracted. Please check that all parameters have been entered correctly.'); end
-fprintf('Extraction finished after %.2f seconds.\n', toc);
+fprintf('Extraction finished after %.2f seconds.\n%d out of %d files were found and extracted (%.2f%%).\n', toc, TotalFileExist, TotalDays, 100*TotalFileExist/TotalDays);
 
 % Additional functionalities
 if Opts.RemOutlier && exist('GM', 'var')
