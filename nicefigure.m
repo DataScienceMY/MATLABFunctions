@@ -45,6 +45,7 @@ set(AllText, 'Interpreter', 'latex', 'FontSize', Opts.TextSize);
 
 if Opts.PanelLabel
     for i = 1:numel(Opts.FigHandle)
+        clearvars PanelLabelHndl
         CurrentFig = Opts.FigHandle(i);
         ExistingLabel = findall(CurrentFig, 'Tag', 'PanelLabel');
         delete(ExistingLabel);
@@ -54,7 +55,8 @@ if Opts.PanelLabel
         Positions = arrayfun(@(X) X.Position, AxInFig, 'UniformOutput', false);     % If the axes are arranged vertically, label them from bottom to top
         Lefts = cellfun(@(X) X(1), Positions);
         Bottoms = cellfun(@(X) X(2), Positions);
-        if all(round(Lefts(1), 2) == round(Lefts, 2))
+        IsVertStacked = all(round(Lefts(1), 2) == round(Lefts, 2));
+        if IsVertStacked
             AxesOrder = numel(AxInFig):-1:1;
         else
             AxesOrder = 1:numel(AxInFig);
@@ -64,10 +66,15 @@ if Opts.PanelLabel
             AxPosition = AxInFig(j).Position;
             AxInset = AxInFig(j).TightInset;
             LblPosition = [AxPosition(1)-1.1*AxInset(1) AxPosition(2)+0.88*AxPosition(4) 0.04 0.04 ];     % [left, bottom, width, height]
-            LblText = ['\textbf{(', LetterCode, ')}'];
-            annotation(CurrentFig, 'textbox', 'String', LblText, 'Position', LblPosition, 'Units', 'normalized', 'LineStyle', 'none', 'Interpreter', 'latex',...
-                'FitBoxToText', 'on', 'VerticalAlignment', 'middle', 'HorizontalAlignment', 'center', 'Tag', 'PanelLabel');
+            LblText = ['(', LetterCode, ')'];
+            PanelLabelHndl{j} = annotation(CurrentFig, 'textbox', 'String', LblText, 'FontSize', Opts.TextboxSize, 'Position', LblPosition, 'Units', 'normalized', 'LineStyle', 'none', 'Interpreter', 'latex',...
+                'FitBoxToText', 'on', 'VerticalAlignment', 'middle', 'HorizontalAlignment', 'center', 'Tag', 'PanelLabel'); %#ok<AGROW>
             LetterCode = LetterCode + 1;
+        end
+        if IsVertStacked
+            align(PanelLabelHndl, 'None', 'Middle');
+        else
+            align(PanelLabelHndl, 'Center', 'None');
         end
     end
 end
