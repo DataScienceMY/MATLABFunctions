@@ -61,7 +61,7 @@ if Opts.PanelLabel
         else
             AxesOrder = 1:numel(AxInFig);
         end
-        
+       
         for j = AxesOrder
             AxPosition = AxInFig(j).Position;
             AxInset = AxInFig(j).TightInset;
@@ -71,11 +71,7 @@ if Opts.PanelLabel
                 'FitBoxToText', 'on', 'VerticalAlignment', 'middle', 'HorizontalAlignment', 'center', 'Tag', 'PanelLabel'); %#ok<AGROW>
             LetterCode = LetterCode + 1;
         end
-        if IsVertStacked
-            align(PanelLabelHndl, 'None', 'Middle');
-        else
-            align(PanelLabelHndl, 'Center', 'None');
-        end
+     
     end
 end
 
