@@ -18,5 +18,6 @@ Thank you!
 - plotpatch.m                   : Shade the background of a plot with a desired color
 - readMAGDAS.m                  : Reads MAGDAS geomagnetic field data. Read more about the data: http://magdas2.serc.kyushu-u.ac.jp/
 - repheatmaptext.m              : (WORK IN PROGRESS) Replacing uncustomizable text of heatmap to custom (latex) texts
+- runtimeProgress.m             : A simple program to display the progress of runtime
 - subplot2tiled.m               : Convert subplot to tiledlayout
 - tictactoe.m                   : A simple tic-tac-toe game I made just for fun
