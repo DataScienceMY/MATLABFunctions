@@ -61,16 +61,16 @@ if Opts.PanelLabel
         else
             AxesOrder = 1:numel(AxInFig);
         end
-       
+        
         for j = AxesOrder
-            AxPosition = AxInFig(j).Position;
-            AxInset = AxInFig(j).TightInset;
-            LblPosition = [AxPosition(1)-1.1*AxInset(1) AxPosition(2)+0.88*AxPosition(4) 0.04 0.04 ];     % [left, bottom, width, height]
+            AxOuter = AxInFig(j).InnerPosition;
+            LblPosition = [AxOuter(1)-0.010, AxOuter(2)+0.88*AxOuter(4), 0.04, 0.04 ];     % [left, bottom, width, height]
             LblText = ['(', LetterCode, ')'];
             PanelLabelHndl{j} = annotation(CurrentFig, 'textbox', 'String', LblText, 'FontSize', Opts.TextboxSize, 'Position', LblPosition, 'Units', 'normalized', 'LineStyle', 'none', 'Interpreter', 'latex',...
                 'FitBoxToText', 'on', 'VerticalAlignment', 'middle', 'HorizontalAlignment', 'center', 'Tag', 'PanelLabel'); %#ok<AGROW>
             LetterCode = LetterCode + 1;
         end
+        
      
     end
 end
@@ -110,6 +110,5 @@ if ~ isempty(AllColorbar)
     end
 end
 
-    
 end
 
