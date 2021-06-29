@@ -14,11 +14,11 @@ function GM = readMAGDAS(StartDate, EndDate, StnCode, SamplingPeriod, FileNameFo
 %
 % Optional input arguments of name-value pairs
 % Pass arguments like this: readMAGDAS(..., 'Name', Value, ...)
-%   FolderPath (1xn char)                  : 'D:\OneDrive\Data' (default: current MATLAB directory) 
-%   DataFormat (1xn char)                  : '%4d-%02d-%02d %02d:%02d:%02d.000 %3d %9.2f %9.2f %9.2f %9.2f' (default)
-%   HeaderLine (1x1 double)                : 13 (default) | skip until after this line number when scanning for the data
-%   RemOutlier (1x1 logical)               : false (default) | removes outliers
-%   Preview (1x1 logical)                  : false (default) | preview the data
+%   FolderPath (1xn char)                       : 'D:\OneDrive\Data' (default: current MATLAB directory) 
+%   DataFormat (1xn char)                       : '%4d-%02d-%02d %02d:%02d:%02d.000 %3d %9.2f %9.2f %9.2f %9.2f' (default)
+%   HeaderLine (1x1 double)                     : 13 (default) | skip until after this line number when scanning for the data
+%   RemOutlier (1x1 logical)                    : false (default) | removes outliers
+%   Preview (1x1 logical)                       : false (default) | preview the data
 %
 % Written by Adib Yusof (2020) | mkhairuladibmyusof@gmail.com
 

@@ -39,7 +39,7 @@ YMat(2, :) = deal(-1e5);
 YMat(3, :) = deal(+1e5);
 YMat(4, :) = deal(+1e5);
 
-PatchHndl = patch(XMat, YMat, Color, 'HandleVisibility', 'off', 'FaceAlpha', Alpha, 'LineStyle', 'none');
+PatchHndl = patch(AxesHndl, XMat, YMat, Color, 'HandleVisibility', 'off', 'FaceAlpha', Alpha, 'LineStyle', 'none');
 try
     uistack(PatchHndl, 'bottom');
 catch ME
