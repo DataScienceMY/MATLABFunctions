@@ -10,7 +10,7 @@
 
 Thank you!
 
-< Adib >
+< [@khairuladib94](https://github.com/khairuladib94) >
 
 ### Functions
 - heatmapplus.m                 : Create customizable heatmaps
