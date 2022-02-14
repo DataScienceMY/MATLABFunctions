@@ -21,4 +21,4 @@ Thank you!
 - runtimeProgress.m             : Displays the progress of runtime
 - subplot2tiled.m               : Convert subplot to tiledlayout
 - downloadGitHubFile.m          : Downloads a file from a GitHub repo, even a private one. 
-- tictactoe.m                   : A simple tic-tac-toe game I made just for fun
+- [tictactoe.m](tictactoe.m)    : A simple tic-tac-toe game I made just for fun
