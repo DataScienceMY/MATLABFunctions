@@ -17,6 +17,6 @@
 |[`downloadGitHubFile.m`](downloadGitHubFile.m)|Downloads a file from a GitHub repo, even a private one|
 |[`tictactoe.m`](tictactoe.m)|A simple tic-tac-toe game I made just for fun|
 
-[![View MATLABFunctions on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/80581-matlabfunctions)
+[![View Miscellaneous functions on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/106755-miscellaneous-functions)
 
 Thank you!
