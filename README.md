@@ -1,8 +1,8 @@
 *Hi!*
 
-👨🏼‍💻 I write MATLAB code for my study.\n
-🤔 Some of the code are functions for general purpose that I think might be useful to others.\n
-⚒️ Everyone is welcome to fork this repo.\n
+👨🏼‍💻 I write MATLAB code for my study.\
+🤔 Some of the code are functions for general purpose that I think might be useful to others.\
+⚒️ Everyone is welcome to fork this repo.\
 🙋🏼‍♂️ Do raise an issue or pull request to report errors or request features.
 
 |Function|Purposes|
