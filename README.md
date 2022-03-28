@@ -14,8 +14,6 @@
 |[`repheatmaptext.m`](repheatmaptext.m)|(WIP🚧) Replaces uncustomizable text of heatmap to custom (latex) texts|
 |[`runtimeProgress.m`](runtimeProgress.m)|Displays the progress of runtime|
 |[`subplot2tiled.m`](subplot2tiled.m)|Convert subplot to tiledlayout|
-|[`downloadGitHubFile.m`](downloadGitHubFile.m)|Downloads a file from a GitHub repo, even a private one|
-|[`tictactoe.m`](tictactoe.m)|A simple tic-tac-toe game I made just for fun|
 
 [![View Miscellaneous functions on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/106755-miscellaneous-functions)
 
